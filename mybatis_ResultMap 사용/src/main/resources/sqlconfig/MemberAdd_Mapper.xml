@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberAdd">
+
+    <resultMap id="deafaultMap" type="com.glowsoft.model.MemberAddVO">
+        <result column="SMS_SEND_YN" property="sendYn"/>
+        <result column="DENY_PROC_WAY" property="denyWay"/>
+    </resultMap>
+
+    <select id="selectbyUserId" parameterType="String" resultMap="deafaultMap">
+        select SMS_SEND_YN,DENY_PROC_WAY from secum_member_Add
+        where USER_ID = #{userId}
+    </select>
+</mapper>
