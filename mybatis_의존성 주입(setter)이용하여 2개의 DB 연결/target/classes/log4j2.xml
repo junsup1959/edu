@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <Property name="logNm">logtest</Property>
+        <Property name="layoutPattern">%d [%t] %-5level %c(%M:%L) - %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layoutPattern}" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+
+        <!-- 기본 레벨은 debug -->
+        <Root level="debug" additivity="false" >
+            <AppenderRef ref="console" />
+        </Root>
+
+        <!-- 스프링 프레임워크에서 찍는건 level을 info로 설정 -->
+        <logger name="org.springframework" level="info" additivity="false" >
+            <AppenderRef ref="console" />
+        </logger>
+
+        <!-- QUERY LOG -->
+        <logger name="jdbc.sqlonly" additivity="false" level="INFO">
+            <appender-ref ref="console" />
+        </logger>
+
+        <!-- RESULTSET TABLE -->
+        <logger name="jdbc.resultsettable" additivity="false" level="INFO">
+            <appender-ref ref="console" />
+        </logger>
+
+        <!-- query + time -->
+        <logger name="jdbc.sqltiming"  level="INFO" additivity="false">
+            <appender-ref ref="console" />
+        </logger>
+
+        <!-- 전체 로그 ( 양 상당히 많아짐 ) -->
+        <!--<logger name="jdbc.audit" level="INFO" additivity="false">-->
+            <!--<appender-ref ref="console" />-->
+        <!--</logger>-->
+        <logger name="jdbc.audit" level="off"/>
+        <!-- resultsettable + resultset (parameter) -->
+        <logger name="jdbc.resultset" level="INFO" additivity="false">
+            <appender-ref ref="console" />
+        </logger>
+        <!-- connection log -->
+        <logger name="jdbc.connection" level="INFO" additivity="false">
+            <appender-ref ref="console" />
+        </logger>
+    </Loggers>
+</Configuration>
